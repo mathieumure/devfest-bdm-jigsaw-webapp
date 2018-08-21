@@ -21,12 +21,14 @@ export function getCharacters(
         (it: any) => new SuperHero(it.id, it.name, it.description)
       )
     )
-    .catch((error: any): any => {
-      if (error.response.status === 404) {
-        return Promise.resolve([]);
+    .catch(
+      (error: any): any => {
+        if (error.response.status === 404) {
+          return Promise.resolve([]);
+        }
+        console.error(error.response);
       }
-      console.error(error.response);
-    });
+    );
 }
 
 export function getCharacter(id: number): Promise<SuperHero> {

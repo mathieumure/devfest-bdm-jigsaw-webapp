@@ -1,19 +1,19 @@
-import { shallow } from "@vue/test-utils";
+import { shallowMount } from "@vue/test-utils";
 import SuperheroCard from "@/components/SuperheroCard.vue";
 import SuperHero from "@/entities/SuperHero";
 
 describe("SuperheroCard.vue", () => {
   it("renders superhero detail", () => {
     const superhero = new SuperHero(
+      "GUID1",
       "Mathieu Mure",
-      "He's the best i've known",
-      "http://my.super-hero.url.jpg"
+      "He's the best i've known"
     );
-    const wrapper = shallow(SuperheroCard, {
+    const wrapper = shallowMount(SuperheroCard, {
       propsData: { superhero }
     });
     expect(wrapper.find(".superhero-card__logo").attributes().src).toBe(
-      "http://my.super-hero.url.jpg"
+      "/api/images/GUID1?type=standard"
     );
     expect(wrapper.find(".superhero-card__logo").attributes().alt).toEqual(
       "Mathieu Mure"
