@@ -1,6 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 import SuperheroCard from "@/components/SuperheroCard.vue";
-import SuperHero from "@/entities/SuperHero";
+import SuperHero from "@/entities/Character";
 
 describe("SuperheroCard.vue", () => {
   it("renders superhero detail", () => {

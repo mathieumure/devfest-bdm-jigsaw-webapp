@@ -1,10 +1,10 @@
-export default class SuperHero {
-  id: number;
+export default class Character {
+  id: string;
   name: string;
   description?: string;
   logo?: string;
 
-  constructor(id: number, name: string, description?: string) {
+  constructor(id: string, name: string, description?: string) {
     this.id = id;
     this.name = name;
     this.description = description;

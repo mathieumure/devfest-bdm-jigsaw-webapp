@@ -1,23 +1,22 @@
 <template>
   <main>
-    <div class="superhero-card" style="flex-direction: column;">
-      <input type="text" class="search-superhero" role="searchbox" placeholder="Search for hero" :value="searchValue" @input="updateSearchValue">
-      <div class="score" v-if="showDetail">
+    <div class="character-card" style="flex-direction: column;">
+      <input type="text" class="search-character" role="searchbox" placeholder="Search for character" :value="searchValue" @input="updateSearchValue">
+      <div class="score">
         <span>Score: {{ score }}</span>
         <range-slider class="slider" v-model="score" :min="0" :max="100" :step="1"/>
       </div>
-      <button class="toggle-btn" @click="toggleShowDetail">{{ showDetail ? "-" : "+" }}</button>
     </div>
-    <SuperheroCard :superhero="superhero" v-for="(superhero, idx) in heroes" :key="idx" />
+    <CharacterCard :character="character" v-for="(character, idx) in heroes" :key="idx" />
     <router-link to="/infos" class="search-link">
-      <img src="../assets/SHIELD.png" alt="">
+      <img src="../assets/detail.png" alt="">
     </router-link>
   </main>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import SuperheroCard from "../components/SuperheroCard.vue";
-import SuperHero from "../entities/SuperHero";
+import CharacterCard from "../components/CharacterCard.vue";
+import Character from "../entities/Character";
 import { getCharacters } from "../api/characters.api";
 import RangeSlider from "vue-range-slider";
 
@@ -25,10 +24,10 @@ import "normalize.css";
 import "vue-range-slider/dist/vue-range-slider.css";
 
 @Component({
-  components: { SuperheroCard, RangeSlider }
+  components: { CharacterCard, RangeSlider }
 })
 export default class App extends Vue {
-  heroes: Array<SuperHero> = [];
+  heroes: Array<Character> = [];
   score: number = 90;
   showDetail: boolean = false;
 
@@ -65,7 +64,7 @@ export default class App extends Vue {
 }
 </script>
 <style lang="stylus">
-.search-superhero {
+.search-character {
   flex: 1 1 auto;
   text-align: center;
   font-size: 1.5em;
@@ -80,7 +79,7 @@ export default class App extends Vue {
   width: auto;
   flex: 1 1 auto;
   .range-slider-fill {
-    background-color: #00A7EB;
+    background-color: #fbcf22de;
   }
   .range-slider-knob {
     border: solid;

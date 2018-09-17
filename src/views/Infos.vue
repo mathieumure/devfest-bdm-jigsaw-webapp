@@ -1,22 +1,23 @@
 <template>
   <main>
-    <div class="superhero-card">
-      <div class="superhero-card__detail" v-if="info">
-        <h2 class="superhero-card__title">Infos</h2>
-        <div class="superhero-card__description"><span class="title">JAVA SPECIFICATION VERSION</span> {{info.javaSpecificationVersion}}</div>
-        <div class="superhero-card__description"><span class="title">JAVA VERSION</span> {{info.javaVersion}}</div>
-        <div class="superhero-card__description"><span class="title">JAVA VENDOR</span> {{info.javaVendor}}</div>
-        <div class="superhero-card__description"><span class="title">MODULE NAME</span> {{info.moduleName}}</div>
-        <div class="superhero-card__description" style="display: flex">
-          <span class="title">LOADED MODULES</span>
-          <div class="chips">
-            <span class="chip" v-for="mod in info.modules" :key="mod">{{mod}}</span>
-          </div>
-        </div>
+    <div class="starwars-scroll" v-if="info">
+      <div class="starwars-scroll__content" v-for="i in 4" :key="'content_' + i" :class="'starwars-scroll__content__' + i">
+        <div class="starwars-scroll__title">Information</div>
+        <br>
+        <p>JAVA SPECIFICATION VERSION: {{info.javaSpecificationVersion}}</p>
+        <p>JAVA VERSION: {{info.javaVersion}}</p>
+        <p>JAVA VENDOR: {{info.javaVendor}}</p>
+        <p>MODULE NAME: {{info.moduleName}}</p>
+        <br>
+        <div class="starwars-scroll__subtitle">LOADED MODULES</div>
+        <br>
+        <p></p>
+        <p v-for="mod in info.modules" :key="mod">{{mod}}</p>
       </div>
+      
     </div>
     <router-link to="/characters" class="search-link">
-      <img src="../assets/wolverine.png" alt="">
+      <img src="../assets/search.png" alt="">
     </router-link>
   </main>
 </template>
@@ -36,24 +37,64 @@ export default class App extends Vue {
 }
 </script>
 <style lang="stylus" scoped>
-.superhero-card {
-  padding: 5px;
+.starwars-scroll {
+  font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+  transform: perspective(500px) rotateX(25deg);
+  transform-origin: 50% 100%;
+  text-align: justify;
+  position: absolute;
+  margin-left: -9em;
+  font-weight: bold;
+  overflow: hidden;
+  font-size: 350%;
+  height: 50em;
+  width: 18em;
+  bottom: 0;
+  left: 50%;
+
+  &:after {
+    position: absolute;
+    content: ' ';
+    bottom: 60%;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+
+  &__content {
+    animation: scroll 40s infinite;
+    position: absolute;
+    top: 100%;
+    margin-bottom: 25%;
+    max-width: 100%;
+
+    p {
+      overflow-wrap: break-word;
+      font-size: 0.5em;
+    }
+  }
+
+  for num in (1..4) {
+    &__content__{num} {
+      animation: scroll 40s linear 20s * (num - 1) infinite;
+      position: absolute;
+      top: 100%;
+      margin-bottom: 25%;
+    }
+  }
+  
+  
+  &__title, &__subtitle {
+    text-align: center;
+  }
 }
 
-.title {
-  width: 150px;
-  display: inline-block;
-  color: #666666;
-  margin-right: 20px;
-}
-
-.chips {
-  display: flex;
-  flex-direction: column;
-  margin-top: 5px;
-}
-
-.chip {
-  font-size: 0.9em;
+@keyframes scroll {
+    0% {
+        top: 100%;
+    }
+    100% {
+        top: -40%;
+    }
 }
 </style>

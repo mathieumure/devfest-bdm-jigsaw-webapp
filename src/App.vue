@@ -13,12 +13,17 @@ export default class App extends Vue {}
 <style lang="stylus">
 body {
   background: url('/cover.jpg') fixed;
-  background-size: 100vw 774px;
+  background-position: 0px 25vh;
   width: calc(100vw - (100vw - 100%));
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: 'Bangers', cursive;
+  font-family: 'Pathway Gothic One', sans-serif;
+  text-transform: uppercase;
+  font-size: 22px;
+  font-weight: 600;
+  color: #fbcf22de;
+  letter-spacing: 6px;
 }
 
 header {
@@ -76,49 +81,6 @@ footer {
 main {
   flex: 1 0 auto;
   margin-top: 50px;
-}
-
-.superhero-card {
-  margin: auto;
-  width: 50%;
-  background-color: white;
-  display: flex;
-  border: solid 5px;
-  box-shadow: 15px 15px rgba(0, 0, 0, 0.3);
-  margin-bottom: 20px;
-  flex-direction: row;
-
-  // Tablet
-  @media screen and (max-width: 1024px) {
-    width: 75%;
-  }
-
-  // mobile
-  @media screen and (max-width: 768px) {
-    flex-direction: column !important;
-
-    &__logo {
-      max-width: 195px;
-    }
-  }
-
-  &:nth-child(even) {
-    transform: skewX(5deg);
-    flex-direction: row-reverse;
-  }
-
-  &:nth-child(odd) {
-    transform: skewX(-5deg);
-  }
-
-  &__logo {
-    max-height: 195px;
-  }
-
-  &__detail {
-    padding: 0px 10px 10px 10px;
-    flex: 1 1 auto;
-  }
 }
 
 .search-link {

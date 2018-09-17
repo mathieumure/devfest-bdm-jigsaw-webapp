@@ -1,34 +1,34 @@
 <template>
   <main>
-    <SuperheroCard :superhero="hero" v-if="hero"/>
+    <CharacterCard :character="character" v-if="character"/>
     <router-link to="/characters" class="search-link">
-      <img src="../assets/wolverine.png" alt="">
+      <img src="../assets/search.png" alt="">
     </router-link>
   </main>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import SuperheroCard from "../components/SuperheroCard.vue";
-import SuperHero from "../entities/SuperHero";
+import CharacterCard from "../components/CharacterCard.vue";
+import Character from "../entities/Character";
 import { getCharacter } from "../api/characters.api";
 
 import "normalize.css";
 
 @Component({
-  components: { SuperheroCard }
+  components: { CharacterCard }
 })
 export default class App extends Vue {
-  hero: SuperHero | null = null;
+  character: Character | null = null;
   @Prop({ required: true })
   id!: string;
 
   async mounted() {
-    this.hero = await getCharacter(Number.parseInt(this.id));
+    this.character = await getCharacter(this.id);
   }
 }
 </script>
 <style lang="stylus">
-.search-superhero {
+.search-character {
   flex: 1 1 auto;
   text-align: center;
   font-size: 1.5em;
