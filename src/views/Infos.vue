@@ -77,10 +77,10 @@ export default class App extends Vue {
 
   for num in (1..4) {
     &__content__{num} {
-      animation: scroll 40s linear 20s * (num - 1) infinite;
+      animation: scroll 40s linear 40s * (num - 1) infinite;
       position: absolute;
       top: 100%;
-      margin-bottom: 25%;
+      margin-bottom: 50%;
     }
   }
   
