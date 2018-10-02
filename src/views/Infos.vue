@@ -1,6 +1,6 @@
 <template>
   <main>
-    <audio src="/opening.mp3" autoplay></audio>
+    <audio src="/opening.ogg" autoplay></audio>
     <div class="starwars-scroll" v-if="info">
       <div class="starwars-scroll__content" v-for="i in 4" :key="'content_' + i" :class="'starwars-scroll__content__' + i">
         <div class="starwars-scroll__title">Information</div>
