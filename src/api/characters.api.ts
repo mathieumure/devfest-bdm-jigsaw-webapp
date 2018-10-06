@@ -26,6 +26,7 @@ export function getCharacters(
         if (error.response.status === 404) {
           return Promise.resolve([]);
         }
+        /* eslint-disable no-console */
         console.error(error.response);
       }
     );
