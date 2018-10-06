@@ -1,5 +1,12 @@
 <template>
-  <router-view />
+  <div class="app">
+    <router-view />
+    <footer class="footer">
+      <img src="./assets/zenika.png" alt="Zenika Logo">
+      <img src="./assets/devfest.png" alt="Devfest Nantes 2018 Logo">
+      <img src="./assets/jetbrains.png" alt="Jetbrains Logo">
+    </footer>
+  </div>
 </template>
 
 <script lang="ts">
@@ -11,7 +18,7 @@ export default class App extends Vue {}
 </script>
 
 <style lang="stylus">
-body {
+.app {
   background: url('/cover.jpg') fixed;
   background-position: 0px 25vh;
   width: calc(100vw - (100vw - 100%));
@@ -52,12 +59,11 @@ header {
 
 footer {
   min-height: 50px;
-  background-color: #fff;
   padding: 10px 30px 5px 10px;
   position: relative;
   display: flex;
   align-items: center;
-  border-top: solid 5px;
+  justify-content: space-around;
 
   // mobile
   @media screen and (max-width: 768px) {
@@ -69,7 +75,7 @@ footer {
   }
 
   img {
-    height: 25px;
+    max-height: 75px;
   }
 
   .copyright {
