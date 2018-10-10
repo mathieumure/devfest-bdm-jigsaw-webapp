@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <router-view />
-    <footer class="footer">
+    <footer class="footer" v-if="!isInfosRoute">
       <img src="./assets/zenika.png" alt="Zenika Logo">
       <img src="./assets/devfest.png" alt="Devfest Nantes 2018 Logo">
       <img src="./assets/jetbrains.png" alt="Jetbrains Logo">
@@ -14,7 +14,11 @@ import { Vue } from "vue-property-decorator";
 
 import "normalize.css";
 
-export default class App extends Vue {}
+export default class App extends Vue {
+  get isInfosRoute(): boolean {
+    return this.$route.path === "/infos";
+  }
+}
 </script>
 
 <style lang="stylus">
