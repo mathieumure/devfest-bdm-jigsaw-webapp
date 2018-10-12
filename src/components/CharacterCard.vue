@@ -56,6 +56,7 @@ export default class CaracterCard extends Vue {
 
   &__logo {
     max-height: 195px;
+    min-width: 180px;
     border-radius: 6px 0px;
   }
 
