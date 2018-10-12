@@ -17,6 +17,7 @@
       </div>
       
     </div>
+    <Loader v-else />
     <router-link to="/characters" class="search-link">
       <img src="../assets/search.png" alt="">
     </router-link>
@@ -26,11 +27,12 @@
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import Infos from "../entities/Infos";
 import { getInfos } from "../api/characters.api";
+import Loader from "../components/Loader.vue";
 
 import "normalize.css";
 
-@Component
-export default class App extends Vue {
+@Component({ components: { Loader } })
+export default class InfosPage extends Vue {
   info: Infos | null = null;
   async mounted() {
     this.info = await getInfos();

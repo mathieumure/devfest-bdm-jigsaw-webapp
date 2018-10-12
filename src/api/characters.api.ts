@@ -28,6 +28,7 @@ export function getCharacters(
         }
         /* eslint-disable no-console */
         console.error(error.response);
+        return Promise.reject();
       }
     );
 }

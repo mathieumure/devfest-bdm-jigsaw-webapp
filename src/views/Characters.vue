@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main @scroll="detectEndOfPage">
     <div class="character-card" style="flex-direction: column;">
       <input type="text" class="search-character" role="searchbox" placeholder="Search for character" :value="searchValue" @input="updateSearchValue">
       <div class="score">
@@ -7,7 +7,8 @@
         <range-slider class="slider" v-model="score" :min="0" :max="100" :step="1"/>
       </div>
     </div>
-    <CharacterCard :character="character" v-for="(character, idx) in heroes" :key="idx" />
+    <Loader v-if="loading" />
+    <CharacterCard :character="character" v-for="(character, idx) in displayedCharacters" :key="idx" />
     <router-link to="/infos" class="search-link">
       <img src="../assets/detail.png" alt="">
     </router-link>
@@ -16,6 +17,7 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import CharacterCard from "../components/CharacterCard.vue";
+import Loader from "../components/Loader.vue";
 import Character from "../entities/Character";
 import { getCharacters } from "../api/characters.api";
 import RangeSlider from "vue-range-slider";
@@ -24,15 +26,24 @@ import "normalize.css";
 import "vue-range-slider/dist/vue-range-slider.css";
 
 @Component({
-  components: { CharacterCard, RangeSlider }
+  components: { CharacterCard, RangeSlider, Loader }
 })
-export default class App extends Vue {
-  heroes: Array<Character> = [];
+export default class CharactersPage extends Vue {
+  characters: Array<Character> = [];
   score: number = 90;
   showDetail: boolean = false;
+  loading: boolean = false;
+  currentPage: number = 1;
 
   get searchValue(): string {
     return this.$route.query.search;
+  }
+
+  get displayedCharacters(): Array<Character> {
+    if (this.characters) {
+      return this.characters.slice(0, 20 * this.currentPage);
+    }
+    return this.characters;
   }
 
   updateSearchValue($event: any): void {
@@ -55,11 +66,23 @@ export default class App extends Vue {
   }
 
   async fetchData() {
-    this.heroes = await getCharacters(this.searchValue, this.score);
+    this.loading = true;
+    this.characters = await getCharacters(this.searchValue, this.score);
+    this.loading = false;
   }
 
   mounted() {
     this.fetchData();
+    window.addEventListener("scroll", this.detectEndOfPage);
+  }
+
+  detectEndOfPage() {
+    if (
+      window.innerHeight + window.scrollY >=
+      document.body.offsetHeight - 500
+    ) {
+      this.currentPage = this.currentPage + 1;
+    }
   }
 }
 </script>
