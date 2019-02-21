@@ -2,9 +2,8 @@
   <div class="app">
     <router-view />
     <footer class="footer" v-if="!isInfosRoute">
-      <img src="./assets/zenika.png" alt="Zenika Logo">
-      <img src="./assets/devfest.png" alt="Devfest Nantes 2018 Logo">
-      <img src="./assets/jetbrains.png" alt="Jetbrains Logo">
+      <img src="./assets/zenika.png" alt="Zenika Logo" style="max-height: 45px;">
+      <img src="./assets/logo-devfest.svg" alt="Devfest du Bout du monde 2018 Logo">
     </footer>
   </div>
 </template>

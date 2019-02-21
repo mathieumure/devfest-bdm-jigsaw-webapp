@@ -1,4 +1,4 @@
-# devfest-nantes-jigsaw-webapp
+# devfest-bdm-jigsaw-webapp
 
 ## Project setup
 ```
